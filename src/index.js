@@ -5,7 +5,13 @@
 // import './component-intermediate/state-study-3.js'
 
 // import './quiz/props1.js'
-import './quiz/props2.js'
+// import './quiz/props2.js'
+
+// import './component-intermediate/state-study-with-inner-object.js'
+// import './component-intermediate/counter-with-hook-caveat.js'
+
+import './js-study/immutable-list-manipulation.js'
+
 
 
 
