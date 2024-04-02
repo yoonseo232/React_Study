@@ -14,8 +14,8 @@
 // import './quiz/array1.js'
 
 // import './component-intermediate/manipulate-list'
-// import './component-intermediate/todo-app-demo'
-import './component-intermediate/todo-app-study'
+import './component-intermediate/todo-app-demo'
+// import './component-intermediate/todo-app-study'
 
 
 
