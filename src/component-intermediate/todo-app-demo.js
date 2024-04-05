@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
-function TodoList({todos, handleTodoRemove}){
+function TodoList({todos, handleTodoRemove, hadleTodoStatusToggle}){
     return <div>
             <ul>{
                 todos.map((todo, index) => {
                     //li -> TodoItem으로 
-                    return <TodoItem index={index} todo={todo} handleTodoRemove={handleTodoRemove}/>
+                    return <TodoItem index={index} todo={todo} handleTodoRemove={handleTodoRemove} hadleTodoStatusToggle={hadleTodoStatusToggle}/>
                 })
             }
             </ul>    
         </div>
 }
 
-function TodoItem({todo, index, handleTodoRemove}){
+function TodoItem({todo, index, handleTodoRemove, hadleTodoStatusToggle}){
     //삭제 버튼 추가 -> [X]
     return <li>
-        {todo.text}
-        <button>X</button>
+        <span onClick={() => hadleTodoStatusToggle(index)} style={todo.completed ? {textDecoration : "line-through"} : null}>{todo.text}</span>
+        <button onClick={() => handleTodoRemove(index)}>X</button>
     </li>
 }
 
@@ -47,14 +47,27 @@ function TodoApp(props){
     // handleTodoRemove 함수를 만들어서 지우고 싶은 위치(index) 값을 전달 받아서 해당 할 일을 삭제
     // filter, filter(item, idx) => 
     const handleTodoRemove = index => setTodos(
-        todo => todos.filter((item, todoIndex) => index != todoIndex)
+        todos => todos.filter((_, todoIndex) => index !== todoIndex)
     )
     
-        return <div>
-            <TodoList todos={todos}/>
-            {/*handleTodoAdd라는 props 값으로 TodoAdder에 전달하기*/}
-            <TodoAbber handleTodoAdd={handleTodoAdd}/>
-        </div>
+    //handleTodoStatusToggle 함수를 작성하고, 함수에서는 index 정보를 받아서 해당 index의 todo의 completed 상태를 반전(map 함수 사용)
+    const hadleTodoStatusToggle = index => setTodos(
+        todos => todos.map((todo, todoIndex) => {
+            //index와 todoIndex 비교해서 같으면 completed 상태를 반전
+            if(index === todoIndex){
+                return {...todo, completed: !todo.completed}
+            }
+            return todo;
+        })
+    )
+
+    return <div>
+        <TodoList todos={todos} handleTodoRemove={handleTodoRemove} hadleTodoStatusToggle={hadleTodoStatusToggle}/>
+        {/*handleTodoAdd라는 props 값으로 TodoAdder에 전달하기*/}
+        <TodoAbber handleTodoAdd={handleTodoAdd}/>
+    </div>
+
+    
     
 }
 
