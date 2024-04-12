@@ -18,5 +18,6 @@
 // import './component-intermediate/todo-app-study'
 
 
-import './quiz/bulletinBoard'
+// import './quiz/bulletinBoard'
+import './use-effect-demo/use-effect-intro'
 
