@@ -26,5 +26,5 @@
 // import './use-effect-demo/use-effect-unmount-deps'
 // import './use-effect-demo/use-effect-with-dom'
 // import './component-intermediate/timer-demo'
-import './use-effect-demo/github-fetch-repos'
+// import './use-effect-demo/github-fetch-repos'
 
