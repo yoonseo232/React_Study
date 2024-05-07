@@ -49,11 +49,30 @@ function UserInfo(props) {
     return (
         <div>
             <img src={loginUser.picture} style={{ borderRadius: '50%' }}/>
-            <p>username: {loginUser.username}</p>
-            <p>email: {loginUser.email}</p>
-            <p>cell: {loginUser.cell}</p>
+            <span>username: {loginUser.username}</span>
+            <span>email: {loginUser.email}</span>
+            <span>cell: {loginUser.cell}</span>
         </div>
     )
+}
+
+function UserButoon(props){
+    const {loginUser} = useContext(LoginUserContext)
+    return <div>
+        {   loginUser === null ?
+            <div>
+                {/* <h2>"방문자"님 환영합니다.</h2> */}
+                <LoginButton />
+            </div>
+            :
+            <div>
+                {/* <h2>"{loginUser.username}"님 환영합니다.</h2> */}
+                <UserInfo />
+                <LogoutButton />
+            </div>
+        }
+    </div>
+     
 }
 
 function App() {
@@ -61,19 +80,7 @@ function App() {
 
     return (
         <LoginUserContext.Provider value={ { loginUser, setLoginUser } }>
-            {
-                loginUser === null ?
-                    <div>
-                        <h2>"방문자"님 환영합니다.</h2>
-                        <LoginButton />
-                    </div>
-                    :
-                    <div>
-                        <h2>"{loginUser.username}"님 환영합니다.</h2>
-                        <UserInfo />
-                        <LogoutButton />
-                    </div>
-            }
+            <UserButoon/>
         </LoginUserContext.Provider>
     )
 }
