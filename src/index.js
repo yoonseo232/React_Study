@@ -28,3 +28,7 @@
 // import './component-intermediate/timer-demo'
 // import './use-effect-demo/github-fetch-repos'
 
+// import './use-context-demo/use-context-using-user-context'
+// import './use-context-demo/context-api-theme-context'
+import './use-context-demo/fack-login'
+
