@@ -1,4 +1,5 @@
-import { useCallback } from "react"
+import { useState, useCallback, useMemo } from "react"
+import ReactDOM from "react-dom"
 
 const UserManageApp = () => {
     const [users, setUsers] = useState([
@@ -12,23 +13,32 @@ const UserManageApp = () => {
     const [age, setAge] = useState(20)
 
     // useCallback 사용하여 새 사용자 추가하는 함수 생성 및 저장
-    const addUser = useCallback(user => {
-        setUsers(users.concate(user))
-    })
+    const addUser = useCallback(
+        newUsers => setUsers(users => users.concate(newUsers)),
+    [users])
     // useMemo 사용하여 나이 20 미만인 미성년자 수 저장
-    const minorCount = useMemo(() => {
-        return users.filter(f => f.age < 20).length
-    })
+    let minorCount = useMemo(() => {
+        let count = 0
+        users.forEach(u => {
+            if(u.age < 20) count++
+        })
+        return count
+    }, [users])
     // useMemo 사용하여 나이 20 미만인 미성년자의 이름을 배열 형태로 저장
     const minorNames = useMemo(() => {
-    })
+        //배열 생성하고 반복문으로 미성년자의 이름 추가하고 반환하는 로직
+        let arr = []
+        users.forEach(u => {
+            if(u.age < 20) arr += u.name
+        })
+    }, [URLSearchParams])
 
     return (
         <div>
             <div>
-                <label>이름</label> <input type="text" onChange={(e) => setName(e.target.value)}/><br />
-                <label>나이</label> <input type="number" onChange={(e) => setAge(e.target.value)}/><br />
-                <button onClick={() => addUser}>회원 추가</button>
+                <label>이름</label> <input type="text" value = {name} onChange={e => setName(e.target.value)}/><br />
+                <label>나이</label> <input type="number" value = {age} onChange={e => setAge(e.target.value)}/><br />
+                <button onClick={() => addUser({name, age})}>회원 추가</button>
             </div>
             <hr />
             <div>미성년자 회원 수 : {minorCount}</div>
@@ -41,3 +51,6 @@ const UserManageApp = () => {
         </div>
     )
 }
+
+ReactDOM.render(<UserManageApp />, document.getElementById('root'))
+
