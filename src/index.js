@@ -40,4 +40,7 @@
 
 // import './etc/using-error-boundaries'
 // import './component-styling/using-css'
-import './component-styling/using-css-module'
+// import './component-styling/using-css-module'
+// import './component-styling/using-sass'
+// import './component-styling/using-svg'
+import './component-styling/using-react-icons'
