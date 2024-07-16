@@ -43,4 +43,6 @@
 // import './component-styling/using-css-module'
 // import './component-styling/using-sass'
 // import './component-styling/using-svg'
-import './component-styling/using-react-icons'
+// import './component-styling/using-react-icons'
+
+import './zustand-demo/use-person-store-demo'
